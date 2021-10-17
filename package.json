@@ -1,0 +1,25 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jefferywojo98/employee-tracker.git"
+  },
+  "author": "Jeffery Wojceichowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jefferywojo98/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/Jefferywojo98/employee-tracker#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.1"
+  }
+}
