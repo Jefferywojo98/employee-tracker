@@ -20,5 +20,4 @@ VALUES ("Nick", "Thebestmanagerever", 003, null),
 ("Chuck", "Norris", 002, 003), 
 ("Chris", "Basse", 005, null), 
 ("Richard", "Weagner", 006, 005), 
-("Steven", "Irwin", 007, null), 
-("Johnny", "Cash", 008, 007); null
+("Steven", "Irwin", 007, null); 
