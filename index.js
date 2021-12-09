@@ -1,46 +1,18 @@
-var mysql = require("mysql");
+const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const confirm = require('inquirer-confirm');
 
 var connection = mysql.createConnection({
   host: "localhost",
-  port: 3001,
   user: "root",
-  password: "root",
-  database: "employees"
-}); 
-
-
-
-var showingroles;
-var showingdepartments;
-var showingemployees;
-
-
-connection.connect(function (err) {
-  if (err) {
-    console.error("error connected: " + err.stack);
-    return;
-  }
-  console.log("connected as id " + connection.threadId);
-
-  connection.query("SELECT * from role", function (error, res) {
-    showingroles = res.map(role => ({ name: role.title, value: role.id }))
-  })
-  connection.query("SELECT * from department", function (error, res) {
-    showingdepartments = res.map(dep => ({ name: dep.name, value: dep.id }))
-  })
-  connection.query("SELECT * from employee", function (error, res) {
-    showingemployees = res.map(emp => ({ name: `${emp.first_name} ${emp.last_name}`, value: emp.id }))
-  })
-
-  showmenu();
-})
+  password: "Gocubs@16",
+  database: "employees_db"
+},
+);
 
 // Show inquirer menu
 function showmenu() {
-  inquirer
-    .prompt(
+  inquirer.prompt(
       {
         type: "list",
         message: "Welcome to Jeffery's Employee Tracker. How can I help you?",
@@ -83,7 +55,6 @@ function showmenu() {
       menu(res.choices)
     })
 }
-
 function menu(option) {
   switch (option) {
     case "showEmployees":
@@ -111,9 +82,13 @@ function menu(option) {
       end();
   }
 }
+  showmenu();
+
+
+
 
 function showAllEmployees() {
-  connection.query("SELECT the employee.id, employee.first_name, employee.last_name, role.title, department.name as department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) as manager from employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;", function (error, res) {
+  connection.query("SELECT first_name, last_name FROM employee", function (error, res) {
     console.table(res);
     endOrMenu();
   })
@@ -121,14 +96,14 @@ function showAllEmployees() {
 
 function showAllDepartments() {
   console.log("viewing all the departments")
-  connection.query("SELECT * from department", function (error, res) {
+  connection.query("SELECT * FROM department", function (error, res) {
     console.table(res);
     endOrMenu();
   })
 }
 
 function showAllRoles() {
-  connection.query("SELECT * from role", function (error, res) {
+  connection.query("SELECT title FROM roles", function (error, res) {
     console.table(res);
     endOrMenu();
   })
