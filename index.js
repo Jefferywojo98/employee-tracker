@@ -88,7 +88,7 @@ function menu(option) {
 
 
 function showAllEmployees() {
-  connection.query("SELECT first_name, last_name FROM employee", function (error, res) {
+  connection.query("SELECT first_name, last_name FROM employee", function (res) {
     console.table(res);
     endOrMenu();
   })
@@ -96,14 +96,14 @@ function showAllEmployees() {
 
 function showAllDepartments() {
   console.log("viewing all the departments")
-  connection.query("SELECT * FROM department", function (error, res) {
+  connection.query("SELECT * FROM department", function (res) {
     console.table(res);
     endOrMenu();
   })
 }
 
 function showAllRoles() {
-  connection.query("SELECT title FROM roles", function (error, res) {
+  connection.query("SELECT title FROM roles", function (res) {
     console.table(res);
     endOrMenu();
   })
@@ -148,7 +148,7 @@ function addEmployee() {
         name: "title",
         type: "list",
         message: "What is their employee role?",
-        choices: selectingRoles()
+        choices: selectingRoles(),
       },
       {
         name: "manager",
@@ -186,7 +186,7 @@ function addDepartment() {
     ]).then(function (data) {
       connection.query("INSERT INTO department SET ?",{name: res.name},
       function(err){
-        if(err) throw eff
+        if(err) throw err
         console.table(res);
         endOrMenu();
       }
