@@ -129,6 +129,41 @@ function newDepartment(data) {
   endOrMenu();
 };
 
+function addRole() {
+  inquirer.prompt([{
+              type: "input",
+              message: "What is the new role name?",
+              name: "title"
+          },
+          {
+              type: "input",
+              message: "What is the new role salary?",
+              name: "salary"
+
+          },
+          {
+              type: "list",
+              message: "Which department the new role in?",
+              name: "id",
+              choices: departments
+          }
+      ])
+      .then(function (response) {
+          addNewRole(response);
+      });
+};
+
+function addNewRole(data) {
+  connection.query("INSERT INTO roles SET ?", {
+      title: data.title,
+      salary: data.salary,
+      department_id: data.id
+  }, function (error, res) {
+      if (error) throw error;
+  });
+  endOrMenu();
+};
+
 
 function endOrMenu() {
   confirm("would you like to continue?")
