@@ -225,8 +225,6 @@ function addEmployee() {
       
       ])
       .then(function (response) {
-        console.log(response)
-        endOrMenu();
         addNewRole(response);
       });
   });
