@@ -59,11 +59,10 @@ SQL
 
 ## Links
 ___
-![employeetrackermenu](https://user-images.githubusercontent.com/87153472/148503255-b7027362-6548-49f7-8bfd-d9e029692d5b.png)
 - [GitHub Repository](https://github.com/Jefferywojo98/employee-tracker)
 ## Screenshots/Videos
 ___
-
+![employeetrackermenu](https://user-images.githubusercontent.com/87153472/148503255-b7027362-6548-49f7-8bfd-d9e029692d5b.png)
 [Walkthough Video](https://watch.screencastify.com/v/cNvzLPripDTvV0BzDDyf)
 
 
