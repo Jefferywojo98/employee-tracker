@@ -42,8 +42,8 @@ function showmenu() {
           value: "addRole",
         },
         {
-          name: "Updating role",
-          value: "updatingrole",
+          name: "Updating Employee",
+          value: "updatingEmployee",
         },
         {
           name: "Quit/Terminate",
@@ -55,6 +55,7 @@ function showmenu() {
       menu(res.choices);
     });
 }
+// what they pick attaching to the function
 function menu(option) {
   switch (option) {
     case "showEmployees":
@@ -75,15 +76,15 @@ function menu(option) {
     case "addRole":
       addRole();
       break;
-    case "updatingrole":
-      updatingrole();
+    case "updatingEmployee":
+      updatingEmployee();
       break;
     case "quit":
       end();
   }
 }
 showmenu();
-
+// show all employees
 function showAllEmployees() {
   connection.query(
     "SELECT first_name, last_name FROM employee",
@@ -93,7 +94,7 @@ function showAllEmployees() {
     }
   );
 }
-
+// show all department
 function showAllDepartments() {
   console.log("viewing all the departments");
   connection.query("SELECT * FROM department", function (err, res) {
@@ -101,14 +102,14 @@ function showAllDepartments() {
     endOrMenu();
   });
 }
-
+// show all roles
 function showAllRoles() {
   connection.query("SELECT title FROM roles", function (err, res) {
     console.table(res);
     endOrMenu();
   });
 }
-
+// adding department
 function addDepartment() {
   inquirer
     .prompt([
@@ -122,7 +123,7 @@ function addDepartment() {
       newDepartment(response);
     });
 }
-
+//  imput the department
 function newDepartment(data) {
   connection.query(
     "INSERT INTO department SET ?",
@@ -133,11 +134,10 @@ function newDepartment(data) {
   );
   endOrMenu();
 }
-
+// adding role
 function addRole() {
   connection.query("SELECT * FROM department", function (err, res) {
-    if (err) throw (err);
-    // console.log(res);
+    if (err) throw (err)
     const fromatResult = []
     res.forEach(department => {
       fromatResult.push({
@@ -170,7 +170,7 @@ function addRole() {
       });
   });
 }
-
+// input role into database
 function addNewRole(data) {
   connection.query(
     "INSERT INTO roles SET ?",
@@ -185,7 +185,7 @@ function addNewRole(data) {
   );
   endOrMenu();
 }
-
+// adding employees
 function addEmployee() {
   connection.query("SELECT * FROM roles", function (err, res) {
     if (err) throw (err);
@@ -231,7 +231,7 @@ function addEmployee() {
       });
   });
 }
-
+// input new imployee into database
 function addNewRole(data){
   connection.query(
     "INSERT INTO employee SET ?",
@@ -246,6 +246,48 @@ function addNewRole(data){
     }
   )
   endOrMenu()}
+// grabing current employee and updating them
+  const updatingEmployee = () => {
+    connection.query('SELECT first_name, last_name, id FROM employee', 
+    (err,selectedEmployee) => {
+        if (err) {
+            console.error(err);
+        }
+        inquirer
+          .prompt({
+            type: 'list',
+            name: 'employee',
+            message: 'Which employee would you like to update?',
+            choices: selectedEmployee.map((employee) => `${employee.id} ${employee.first_name} ${employee.last_name}`)
+        }).then((updateEmployee) => {
+            const {employee} = updateEmployee;
+            const empId = employee.split(' ')[0];
+            connection.query('SELECT title, id FROM roles', (err,roles) => {
+                if (err) {
+                    console.error(err);
+                }
+                inquirer.prompt({
+                    type: 'list',
+                    name: 'roleUpdate',
+                    message: 'Which role is this employee being given?',
+                    choices: roles.map((role) => role.title)
+                }).then((roleAnswer) => {
+                    const {roleUpdate} = roleAnswer;
+                    const roleIndex = roles.map((role) => role.title).indexOf(roleUpdate);
+                    const roleId = roles[roleIndex].id;
+                   connection.query('UPDATE employee SET role_id = ? WHERE id = ?', [roleId, empId], (err,res) => {
+                        if(err) {
+                            console.error(err);
+                        }
+                        console.log('Employee successfully updated!');
+                        endOrMenu();
+                    });
+                });
+            });
+        });
+    }); 
+}
+
 
 function endOrMenu() {
   confirm("would you like to continue?").then(
