@@ -64,7 +64,7 @@ ___
 ## Screenshots/Videos
 ___
 
-[Walkthough Video](https://watch.screencastify.com/v/cNvzLPripDTvV0BzDDyf)
+[Walkthough Video](https://watch.screencastify.com/v/51qlhOXNo2Be2fwdhEkJ)
 
 
 ## Usage
