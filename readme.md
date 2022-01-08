@@ -62,14 +62,10 @@ ___
 - [GitHub Repository](https://github.com/Jefferywojo98/employee-tracker)
 ## Screenshots/Videos
 ___
-<<<<<<< HEAD
-
 [Walkthough Video](https://watch.screencastify.com/v/51qlhOXNo2Be2fwdhEkJ)
 =======
 ![employeetrackermenu](https://user-images.githubusercontent.com/87153472/148503255-b7027362-6548-49f7-8bfd-d9e029692d5b.png)
-[Walkthough Video](https://watch.screencastify.com/v/cNvzLPripDTvV0BzDDyf)
->>>>>>> 2a73f47f199afa42d45fa86c37df8117f58643ad
-
+[Walkthough Video](https://watch.screencastify.com/v/51qlhOXNo2Be2fwdhEkJ)
 
 ## Usage
 ___
